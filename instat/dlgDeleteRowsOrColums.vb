@@ -44,8 +44,8 @@ Public Class dlgDeleteRowsOrColums
         ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
 
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrReceiverForColumnsToDelete, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudFrom, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudTo, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudFrom, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudTo, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorForDeleteColumns.SetParameter(New RParameter("data_name", 0))
@@ -58,11 +58,9 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.SetLinkedDisplayControl(lblColumnsToDelete)
 
         ucrNudFrom.SetParameter(New RParameter("From", 0))
-        ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
 
-        ucrNudTo.SetParameter(New RParameter("To", 2))
-        ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
+        ucrNudTo.SetParameter(New RParameter("To", 1))
         ucrNudTo.SetLinkedDisplayControl(lblTo)
 
         ucrDataFrameLengthForDeleteRows.SetLinkedDisplayControl(lblNumberofRows)
