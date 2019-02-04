@@ -286,7 +286,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 294</value>
+    <value>240, 258</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -316,7 +316,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 321</value>
+    <value>240, 285</value>
   </data>
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 13</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSequence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 348</value>
+    <value>231, 312</value>
   </data>
   <data name="lblSequence.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
@@ -370,7 +370,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 348</value>
+    <value>299, 312</value>
   </data>
   <data name="ucrInputBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 21</value>
@@ -391,7 +391,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 321</value>
+    <value>299, 285</value>
   </data>
   <data name="ucrInputTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 21</value>
@@ -412,7 +412,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 294</value>
+    <value>299, 258</value>
   </data>
   <data name="ucrInputFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 21</value>

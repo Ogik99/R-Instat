@@ -64,6 +64,27 @@ Public Class dlgCumulativeDistribution
         ucrPnlOption.AddParameterPresentCondition(rdoCumulative, "Yscales")
         ucrPnlOption.AddParameterPresentCondition(rdoExceedance, "reverseYscales")
 
+        ucrPnlOption.AddToLinkedControls(ucrInputBy, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBy.SetLinkedDisplayControl(lblSequence)
+
+        ucrPnlOption.AddToLinkedControls(ucrInputFrom, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBy.SetLinkedDisplayControl(lblFrom)
+
+        ucrPnlOption.AddToLinkedControls(ucrInputTo, {rdoCumulative}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBy.SetLinkedDisplayControl(lblTo)
+
+        ucrInputFrom.SetParameter(New RParameter("from", 0))
+        ucrInputFrom.AddQuotesIfUnrecognised = False
+        ucrInputFrom.SetValidationTypeAsNumeric()
+
+        ucrInputTo.SetParameter(New RParameter("to", 1))
+        ucrInputTo.AddQuotesIfUnrecognised = False
+        ucrInputTo.SetValidationTypeAsNumeric()
+
+        ucrInputBy.SetParameter(New RParameter("by", 2))
+        ucrInputBy.AddQuotesIfUnrecognised = False
+        ucrInputBy.SetValidationTypeAsNumeric()
+
         ucrCumDistSelector.SetParameter(New RParameter("data", 0))
         ucrCumDistSelector.SetParameterIsrfunction()
 
@@ -107,8 +128,8 @@ Public Class dlgCumulativeDistribution
         clsRgeomCumDistFunction = New RFunction
         clsRggplotFunction = New RFunction
         clsScaleYReverseFunc = New RFunction
-
         clsSequence = New RFunction
+
         clsSequence.SetRCommand("seq")
         clsSequence.AddParameter("from", "0", iPosition:=0)
         clsSequence.AddParameter("to", "1", iPosition:=1)
@@ -162,8 +183,6 @@ Public Class dlgCumulativeDistribution
         ucrInputFrom.SetRCode(clsSequence, bReset)
         ucrInputTo.SetRCode(clsSequence, bReset)
         ucrInputBy.SetRCode(clsSequence, bReset)
-
-
     End Sub
 
     Private Sub TestOkEnabled()
