@@ -22,6 +22,7 @@ Public Class dlgBoxplot
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
+    Private clsStatSummary As New RFunction
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -66,7 +67,7 @@ Public Class dlgBoxplot
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
         Dim clsAddedJitterParam As New RParameter
-
+        Dim dctSummaries As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 3
@@ -148,6 +149,16 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
+        ucrInputSummaries.SetParameter(New RParameter("fun.y", 2))
+        dctSummaries.Add("mean", Chr(34) & "mean" & Chr(34))
+        dctSummaries.Add("median", Chr(34) & "median" & Chr(34))
+        dctSummaries.Add("lower quartile", Chr(34) & "lower quartile" & Chr(34))
+        dctSummaries.Add("upper quartile", Chr(34) & "upper quartile" & Chr(34))
+        ucrInputSummaries.SetItems(dctSummaries)
+        ucrInputSummaries.SetDropDownStyleAsNonEditable()
+
+        ucrChkGrouptoConnect.SetText("Group to Connect")
+        ucrChkGrouptoConnect.AddToLinkedControls(ucrInputSummaries, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
         'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
@@ -159,6 +170,7 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsLocalRaesFunction = New RFunction
+        clsStatSummary = New RFunction
 
         'Setting up new functions
         clsBoxplotFunc = New RFunction
@@ -202,6 +214,7 @@ Public Class dlgBoxplot
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsBoxplotFunc, iPosition:=2)
+        clsBaseOperator.AddParameter("stat_summary", clsRFunctionParameter:=clsStatSummary, iPosition:=3)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -211,6 +224,12 @@ Public Class dlgBoxplot
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
 
+        clsStatSummary.SetPackageName("ggplot2")
+        clsStatSummary.SetRCommand("stat_summary")
+        clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34))
+        clsStatSummary.AddParameter("group", 1)
+        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34))
+        clsStatSummary.AddParameter("size", 1.5)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -242,7 +261,8 @@ Public Class dlgBoxplot
         ucrChkAddPoints.SetRCode(clsBaseOperator, bReset)
         ucrNudJitter.SetRCode(clsAddedJitterFunc, bReset)
         ucrNudTransparency.SetRCode(clsAddedJitterFunc, bReset)
-
+        ucrInputSummaries.SetRCode(clsStatSummary, bReset)
+        ucrChkGrouptoConnect.SetRCode(clsStatSummary, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunc, bReset)
     End Sub
 
